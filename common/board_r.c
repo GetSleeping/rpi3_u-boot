@@ -303,7 +303,7 @@ static int initr_of_live(void)
 static int initr_dm(void)
 {
 	int ret;
-
+	debug("-------- Enter %s --------\n",__func__);
 	/* Save the pre-reloc driver model and start a new one */
 	gd->dm_root_f = gd->dm_root;
 	gd->dm_root = NULL;
@@ -320,7 +320,7 @@ static int initr_dm(void)
 	if (ret)
 		return ret;
 #endif
-
+	debug("-------- Exit %s --------\n",__func__);
 	return 0;
 }
 #endif

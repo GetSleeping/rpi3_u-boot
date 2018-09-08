@@ -24,6 +24,6 @@ config SYS_SOC
 source "board/gumstix/duovero/Kconfig"
 source "board/ti/panda/Kconfig"
 source "board/ti/sdp4430/Kconfig"
-source "board/amazon/kc1/Kconfig"
+#source "board/amazon/kc1/Kconfig"
 
 endif

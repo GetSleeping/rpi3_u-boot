@@ -71,16 +71,22 @@ int video_reserve(ulong *addrp)
 {
 	struct udevice *dev;
 	ulong size;
+	int ret;
 
 	gd->video_top = *addrp;
-	for (uclass_find_first_device(UCLASS_VIDEO, &dev);
+	for (ret = uclass_find_first_device(UCLASS_VIDEO, &dev);
 	     dev;
-	     uclass_find_next_device(&dev)) {
+	     ret = uclass_find_next_device(&dev)) {
 		size = alloc_fb(dev, addrp);
 		debug("%s: Reserving %lx bytes at %lx for video device '%s'\n",
 		      __func__, size, *addrp, dev->name);
 	}
+	
 	gd->video_bottom = *addrp;
+
+	if (ret)
+		printf("%s: Video device failed (ret=%d)\n", __func__, ret);
+
 	debug("Video frame buffers from %lx to %lx\n", gd->video_bottom,
 	      gd->video_top);
 

@@ -456,6 +456,7 @@ static void rpi_disable_inactive_uart(void)
 
 int board_init(void)
 {
+	debug("-------- Enter %s --------\n",__func__);
 #ifdef CONFIG_HW_WATCHDOG
 	hw_watchdog_init();
 #endif
@@ -467,6 +468,7 @@ int board_init(void)
 
 	gd->bd->bi_boot_params = 0x100;
 
+	debug("-------- Exit %s --------\n",__func__);
 	return bcm2835_power_on_module(BCM2835_MBOX_POWER_DEVID_USB_HCD);
 }
 

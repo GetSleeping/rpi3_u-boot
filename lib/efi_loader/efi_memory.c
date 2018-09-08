@@ -454,6 +454,7 @@ __weak void efi_add_known_memory(void)
 
 int efi_memory_init(void)
 {
+	debug("-------- Enter %s --------\n",__func__);
 	unsigned long runtime_start, runtime_end, runtime_pages;
 	unsigned long uboot_start, uboot_pages;
 	unsigned long uboot_stack_size = 16 * 1024 * 1024;
@@ -484,6 +485,6 @@ int efi_memory_init(void)
 
 	efi_bounce_buffer = (void*)(uintptr_t)efi_bounce_buffer_addr;
 #endif
-
+	debug("-------- Exit %s --------\n",__func__);
 	return 0;
 }

@@ -297,6 +297,7 @@ int stdio_deregister(const char *devname, int force)
 
 int stdio_init_tables(void)
 {
+	debug("-------- Enter %s --------\n",__func__);
 #if defined(CONFIG_NEEDS_MANUAL_RELOC)
 	/* already relocated for current ARM implementation */
 	ulong relocation_offset = gd->reloc_off;
@@ -311,12 +312,13 @@ int stdio_init_tables(void)
 
 	/* Initialize the list */
 	INIT_LIST_HEAD(&(devs.list));
-
+	debug("-------- Exit %s --------\n",__func__);
 	return 0;
 }
 
 int stdio_add_devices(void)
 {
+	debug("-------- Enter %s --------\n",__func__);
 #ifdef CONFIG_DM_KEYBOARD
 	struct udevice *dev;
 	struct uclass *uc;
@@ -399,6 +401,7 @@ int stdio_add_devices(void)
 	cbmemc_init();
 #endif
 
+	debug("-------- Exit %s --------\n",__func__);
 	return 0;
 }
 
