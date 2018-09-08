@@ -334,6 +334,7 @@ static int reserve_round_4k(void)
 #ifdef CONFIG_ARM
 __weak int reserve_mmu(void)
 {
+	debug("---------- Enter %s ----------",__func__);
 #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
 	/* reserve TLB table */
 	gd->arch.tlb_size = PGTABLE_SIZE;
@@ -343,6 +344,7 @@ __weak int reserve_mmu(void)
 	gd->relocaddr &= ~(0x10000 - 1);
 
 	gd->arch.tlb_addr = gd->relocaddr;
+	memset(gd->arch.tlb_addr,0x00,gd->arch.tlb_size);
 	debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
 	      gd->arch.tlb_addr + gd->arch.tlb_size);
 
@@ -353,6 +355,7 @@ __weak int reserve_mmu(void)
 	 */
 	gd->arch.tlb_allocated = gd->arch.tlb_addr;
 #endif
+	debug("---------- Exit %s ----------",__func__);
 #endif
 
 	return 0;
